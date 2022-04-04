@@ -112,6 +112,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         ]
 
         // now that we have the imageviews, start setting images
+        self.labelValue.isHidden = true
         self.startImageLoad()
 
         //set initial measurements and locations of imageviews
@@ -134,13 +135,21 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
 //            self.startImageLoad()
 //        }
 //    }
-//
-//    // try once again if not yet loaded
-//    override func viewDidAppear(_ animated: Bool) {
-//        if self.imagesLoaded < 6 {
-//            self.startImageLoad()
-//        }
-//    }
+
+    // try once again if not yet loaded
+    override func viewDidAppear(_ animated: Bool) {
+        for imageView in imageViews {
+            if imageView.image == nil {
+                imageView.image = UIImage(systemName: "person.circle")
+                imageView.tintColor = .systemTeal
+            }
+        }
+        // most likely not very effective, however in testing
+        // an image was filled in after setting the placeholder
+        if self.imagesLoaded < 6 {
+            self.startImageLoad()
+        }
+    }
 
 
     //
